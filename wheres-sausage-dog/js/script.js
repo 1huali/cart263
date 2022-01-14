@@ -1,9 +1,8 @@
 /**
-Title of Project
-Author Name
+CAPTCHA (dog series)
+Wawa Li
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+DIY CAPTCHA where the user has to click on the real dog.
 */
 
 "use strict";
@@ -13,7 +12,7 @@ author, and this description to match your project!
 Description of preload
 */
 function preload() {
-
+loadImage()
 }
 
 
@@ -21,7 +20,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-
+createCanvas(windowWidth, windowHeight);
 }
 
 
