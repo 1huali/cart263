@@ -1,8 +1,17 @@
 class Animals
 constructor () {
-  x:
-  y:
+  x=x,
+  y=y,
+  img=img,
+  angle=0
+}
 
+display(){
+  push();
+  imageMode(CENTER);
+  pop();
+}
 
-
+mouseClick(){
+  random()
 }
