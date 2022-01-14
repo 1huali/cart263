@@ -19,7 +19,4 @@ display(){
   pop();
 }
 
-// mouseClick(){
-//   random()
-// }
 } //fin

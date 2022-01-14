@@ -13,7 +13,7 @@ let animalImgs = [];
 let animals = [];
 
 let captchaImg =undefined;
-let captcha =undefined;
+var captcha =undefined;
 
 /**
 Loading images, storing obj in arrays
@@ -43,10 +43,9 @@ function setup() {
     animals.push(animal);
   }
 
-  let captcha = new Captcha (x,y,captchaImg);
-  let captchaImage = captchaImg;
   let x = random(0, width);
   let y = random(0, height);
+  captcha = new Captcha (x,y,captchaImg);
 
 }
 
@@ -61,8 +60,7 @@ function draw() {
     animals[i].update();
   }
 
-  captcha.update();
-  captcha.doubleClicked();
+// captcha.update();
 
 }
 
