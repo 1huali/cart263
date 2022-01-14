@@ -6,31 +6,78 @@ DIY CAPTCHA where the user has to click on the real dog.
 */
 
 "use strict";
-const animalImg:10;
-const animal2Display:100;
-let animalImg = [];
-let animalObj =[];
+const NUM_ANIMAL_IMG= 11;
+const NUM_ANIMAL= 100;
+
+let animalImgs = [];
+let animals = [];
+
+let captchaImg =undefined;
+let captcha =undefined;
 
 /**
-Description of preload
+Loading images, storing obj in arrays
 */
 function preload() {
-loadImage()
-}
+  for (let i = 0; i < NUM_ANIMAL_IMG; i++) {
+    let animalImage = loadImage(`assets/images/dog${i}.jpeg`);
+    animalImgs.push(animalImage);
+  }
+
+    let captchaImage = loadImage(`assets/images/captcha.jpeg`);
+  }
+
 
 
 /**
-Description of setup
+Create canvas, create animal and captcha objs and stored them into their global variable
 */
 function setup() {
-createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
+
+  for (let i = 0; i < NUM_ANIMAL; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    let animalImage = random(animalImgs);
+    let animal = new Animal(x, y, animalImage);
+    animals.push(animal);
+  }
+
+  let captcha = new Captcha (x,y,captchaImg);
+  let captchaImage = captchaImg;
+  let x = random(0, width);
+  let y = random(0, height);
+
 }
 
 
 /**
-Description of draw()
+Loads classes,
 */
 function draw() {
-display image
+  background(0);
 
+  for (let i = 0; i < animals.length; i++) {
+    animals[i].update();
+  }
+
+  captcha.update();
+  captcha.doubleClicked();
+
+}
+
+function mousePressed(){
+  refresh();
+}
+
+function refresh(){
+  animals= [];
+
+  for (let i = 0; i < NUM_ANIMAL; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    let animalImage = random(animalImgs);
+    let animal = new Animal(x, y, animalImage);
+    animals.push(animal);
+  }
 }
