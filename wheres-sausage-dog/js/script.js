@@ -7,9 +7,9 @@ if it can identify the real from the fake dog.
 */
 
 "use strict";
-let state = 'main';
+// let state = 'main';
 let clicks = 0;
-let botSquadImg = undefined;
+// let botSquadImg = undefined;
 
 
 const NUM_ANIMAL_IMG = 11;
@@ -32,7 +32,7 @@ function preload() {
   }
 
   captchaImg = loadImage(`assets/images/captcha.jpeg`);
-  botSquadImg = loadImage(`assets/images/bot.jpeg`);
+  // botSquadImg = loadImage(`assets/images/bot.jpeg`);
 
 }
 
@@ -41,6 +41,7 @@ Create canvas, create animal and captcha objs and stored them into their global 
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   createAnimals();
   createCaptcha();
 }
@@ -51,16 +52,10 @@ Loads classes,
 function draw() {
   background(0);
 
-  if (state === `main`) {
+  // if (state === `main`) {
     updateAnimals();
     captcha.update();
-    goToNext();
-    test();
-    mousePressed();
-    keyPressed();
-    refresh();
   }
-
   //   // if (state === `gotchu`) {
   //   //   end();
   //   // }}
@@ -71,7 +66,10 @@ function draw() {
   function mousePressed() {
     // console.log(mouseX, mouseY);
     captcha.mousePressed();
+
     clicks++;
+    console.log(clicks);
+    test();
   }
 
   function keyPressed() {
@@ -121,8 +119,8 @@ function draw() {
 
   function test() {
     if (clicks > 5) {
-      window.alert('CAPTCHA : Bot detected.');
-      goToNext();
+      window.alert('WARNING : Amount of trials exceeded. Bot detected.');
+      // goToNext();
     }
   }
 
@@ -139,4 +137,3 @@ function draw() {
   // image(botSquadImg);
   // pop();
   // }
-}
