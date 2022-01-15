@@ -65,12 +65,18 @@ function draw() {
   // captcha.doubleClicked();
 }
 
-
 function mousePressed() {
   // refresh();
+  console.log(mouseX,mouseY);
 
   captcha.mousePressed();
 }
+
+// function keyPressed (){
+//   if (asdkna){
+//     refresh();
+//   }
+// }
 
 function refresh() {
   animals = [];

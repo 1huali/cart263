@@ -3,7 +3,8 @@ class Captcha extends Animal {
   constructor(x, y, image) {
     super(x, y, image);
     this.found = false,
-
+console.log(image);
+console.log(mouseX,mouseY);
       this.rotationSpeed = 0.25
   }
 
