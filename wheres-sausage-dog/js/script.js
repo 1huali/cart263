@@ -42,6 +42,8 @@ Create canvas, create animal and captcha objs and stored them into their global 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+  window.alert('Click on the authentic dog to testify authentic human identity.         Five (5) trials allowed. BACKSPACE to refresh.');
+
   createAnimals();
   createCaptcha();
 }
@@ -120,6 +122,7 @@ function draw() {
   function test() {
     if (clicks > 5) {
       window.alert('WARNING : Amount of trials exceeded. Bot detected.');
+
       // goToNext();
     }
   }
