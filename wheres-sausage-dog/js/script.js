@@ -13,7 +13,7 @@ let animalImgs = [];
 let animals = [];
 
 let captchaImg =undefined;
-var captcha =undefined;
+let captcha =undefined;
 
 /**
 Loading images, storing obj in arrays
@@ -24,7 +24,8 @@ function preload() {
     animalImgs.push(animalImage);
   }
 
-    let captchaImage = loadImage(`assets/images/captcha.jpeg`);
+    let captchaImg = loadImage(`assets/images/captcha.jpeg`);
+    captchaImg = captchaImg;
   }
 
 
@@ -46,6 +47,8 @@ function setup() {
   let x = random(0, width);
   let y = random(0, height);
   captcha = new Captcha (x,y,captchaImg);
+  // captchaImg = captcha;
+  console.log(captchaImg);
 
 }
 
@@ -60,12 +63,15 @@ function draw() {
     animals[i].update();
   }
 
+// when activated, it bug the draw function
 // captcha.update();
-
 }
 
 function mousePressed(){
   refresh();
+
+  // captcha.doubleClicked();
+
 }
 
 function refresh(){
@@ -78,4 +84,8 @@ function refresh(){
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
+
+  let x = random(0, width);
+  let y = random(0, height);
+  captcha = new Captcha (x,y,captchaImg);
 }

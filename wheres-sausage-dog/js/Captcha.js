@@ -1,7 +1,7 @@
 class Captcha extends Animal {
 
-  constructor(x, y, img) {
-    super(x, y, img);
+  constructor(x, y, image) {
+    super(x, y, image);
     this.found = false,
       this.rotationSpeed = 0.25
   }
