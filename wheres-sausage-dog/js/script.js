@@ -7,14 +7,15 @@ if it can identify the real from the fake dog.
 */
 
 "use strict";
-const NUM_ANIMAL_IMG= 11;
-const NUM_ANIMAL= 100;
+const NUM_ANIMAL_IMG = 11;
+const NUM_ANIMAL = 100;
 
 let animalImgs = [];
 let animals = [];
 
-let captchaImg =undefined;
-let captcha =undefined;
+let captchaImg = undefined;
+let captcha = undefined;
+
 
 /**
 Loading images, storing obj in arrays
@@ -25,11 +26,8 @@ function preload() {
     animalImgs.push(animalImage);
   }
 
-    let captchaImg = loadImage(`assets/images/captcha.jpeg`);
-    captchaImg = captchaImg;
-  }
-
-
+  captchaImg = loadImage(`assets/images/captcha.jpeg`);
+}
 
 /**
 Create canvas, create animal and captcha objs and stored them into their global variable
@@ -47,9 +45,8 @@ function setup() {
 
   let x = random(0, width);
   let y = random(0, height);
-  captcha = new Captcha (x,y,captchaImg);
-  // captchaImg = captcha;
-  console.log(captchaImg);
+  captcha = new Captcha(x, y, captchaImg);
+  // console.log(Captcha);
 
 }
 
@@ -64,19 +61,19 @@ function draw() {
     animals[i].update();
   }
 
-// when activated, it bug the draw function
-// captcha.update();
-}
-
-function mousePressed(){
-  refresh();
-
+  captcha.update();
   // captcha.doubleClicked();
-
 }
 
-function refresh(){
-  animals= [];
+
+function mousePressed() {
+  // refresh();
+
+  captcha.mousePressed();
+}
+
+function refresh() {
+  animals = [];
 
   for (let i = 0; i < NUM_ANIMAL; i++) {
     let x = random(0, width);
@@ -88,5 +85,5 @@ function refresh(){
 
   let x = random(0, width);
   let y = random(0, height);
-  captcha = new Captcha (x,y,captchaImg);
+  captcha = new Captcha(x, y, captchaImg);
 }
