@@ -2,7 +2,8 @@
 CAPTCHA (dog series)
 Wawa Li
 
-DIY CAPTCHA where the user has to click on the real dog.
+DIY CAPTCHA where images of fake dogs and real dogs are displayed. The user will authentify as human or bot depending on
+if it can identify the real from the fake dog.
 */
 
 "use strict";
