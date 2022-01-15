@@ -67,16 +67,17 @@ function draw() {
 
 function mousePressed() {
   // refresh();
-  console.log(mouseX,mouseY);
+  console.log(mouseX, mouseY);
 
   captcha.mousePressed();
 }
 
-// function keyPressed (){
-//   if (asdkna){
-//     refresh();
-//   }
-// }
+function keyPressed() {
+  if (keyCode === 32) {
+    refresh()
+  }
+}
+
 
 function refresh() {
   animals = [];
