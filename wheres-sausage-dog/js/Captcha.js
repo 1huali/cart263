@@ -3,7 +3,6 @@ class Captcha extends Animal {
   constructor(x, y, image) {
     super(x, y, image);
     this.found = false,
-// console.log(image);
       this.rotationSpeed = 0.25
   }
 
@@ -11,7 +10,10 @@ class Captcha extends Animal {
     super.update();
 
     if (this.found) {
-      this.angle += this.rotationSpeed;
+      this.angle =+ this.rotationSpeed;
+      console.log(rotationSpeed);
+
+       window.alert('CAPTCHA : Human ID confirmed.')
     }
   }
 

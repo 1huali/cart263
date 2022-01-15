@@ -34,22 +34,9 @@ Create canvas, create animal and captcha objs and stored them into their global 
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  for (let i = 0; i < NUM_ANIMAL; i++) {
-    let x = random(0, width);
-    let y = random(0, height);
-    let animalImage = random(animalImgs);
-    let animal = new Animal(x, y, animalImage);
-    animals.push(animal);
-  }
-
-  let x = random(0, width);
-  let y = random(0, height);
-  captcha = new Captcha(x, y, captchaImg);
-  // console.log(Captcha);
-
+  createAnimals();
+  createCaptcha();
 }
-
 
 /**
 Loads classes,
@@ -57,18 +44,12 @@ Loads classes,
 function draw() {
   background(0);
 
-  for (let i = 0; i < animals.length; i++) {
-    animals[i].update();
-  }
-
+  updateAnimals();
   captcha.update();
-  // captcha.doubleClicked();
 }
 
 function mousePressed() {
-  // refresh();
-  console.log(mouseX, mouseY);
-
+  // console.log(mouseX, mouseY);
   captcha.mousePressed();
 }
 
@@ -79,9 +60,7 @@ function keyPressed() {
 }
 
 
-function refresh() {
-  animals = [];
-
+function createAnimals() {
   for (let i = 0; i < NUM_ANIMAL; i++) {
     let x = random(0, width);
     let y = random(0, height);
@@ -89,8 +68,33 @@ function refresh() {
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
-
-  let x = random(0, width);
-  let y = random(0, height);
-  captcha = new Captcha(x, y, captchaImg);
 }
+
+  function createCaptcha() {
+    let x = random(0, width);
+    let y = random(0, height);
+    captcha = new Captcha(x, y, captchaImg);
+    // console.log(Captcha);
+  }
+
+function updateAnimals(){
+  for (let i = 0; i < animals.length; i++) {
+    animals[i].update();
+  }
+}
+
+  function refresh() {
+    animals = [];
+
+    for (let i = 0; i < NUM_ANIMAL; i++) {
+      let x = random(0, width);
+      let y = random(0, height);
+      let animalImage = random(animalImgs);
+      let animal = new Animal(x, y, animalImage);
+      animals.push(animal);
+    }
+
+    let x = random(0, width);
+    let y = random(0, height);
+    captcha = new Captcha(x, y, captchaImg);
+  }
