@@ -10,10 +10,10 @@ class Captcha extends Animal {
     super.update();
 
     if (this.found) {
-      this.angle =+ this.rotationSpeed;
-      console.log(rotationSpeed);
+      this.angle = +this.rotationSpeed;
+      // console.log(rotationSpeed);
 
-       window.alert('CAPTCHA : Human ID confirmed.')
+      window.alert('CAPTCHA : Human ID confirmed.');
     }
   }
 
@@ -22,9 +22,9 @@ class Captcha extends Animal {
       mouseX < this.x + this.img.width / 2 &&
       mouseY > this.y - this.img.height / 2 &&
       mouseY < this.y + this.img.height / 2) {
-        this.found=true;
-        console.log(this.found);
+      this.found = true;
+      console.log(this.found);
 
-      }
+    }
   }
 } //end
