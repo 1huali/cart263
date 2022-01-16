@@ -14,7 +14,9 @@ update(){
 display(){
   push();
   imageMode(CENTER);
+  angleMode(DEGREES);
   translate(this.x, this.y);
+  rotate(this.angle);
   image(this.img,0,0);
   pop();
 }
