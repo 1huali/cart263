@@ -2,8 +2,8 @@
 CAPTCHA (dog series)
 Wawa Li
 
-DIY CAPTCHA where images of fake dogs and real dogs are displayed. The user will authentify as human or bot depending on
-if it can identify the real from the fake dog.
+DIY CAPTCHA where images of fake dogs and real dogs are displayed. The human user will authentify if
+it identifies the authentic dog.
 */
 
 "use strict";
@@ -12,9 +12,10 @@ let clicks = 0;
 
 let showImage = false;
 let botSquad = undefined;
-let confirmBox =false;
+let confirmBox = false;
 
 let dangerFX = undefined;
+let barkFX = undefined;
 
 const NUM_ANIMAL_IMG = 11;
 const NUM_ANIMAL = 100;
@@ -37,7 +38,8 @@ function preload() {
 
   captchaImg = loadImage(`assets/images/captcha.jpeg`);
   botSquad = loadImage(`assets/images/bot.jpeg`);
-  dangerFX = loadSound(`assets/sounds/bark.wav`)
+  barkFX = loadSound(`assets/sounds/bark.wav`)
+  dangerFX = loadSound(`assets/sounds/growl.wav`)
 
 }
 
@@ -47,7 +49,7 @@ Create canvas, create animal and captcha objs and stored them into their global 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  window.alert('Click on the authentic dog to testify your human identity.                  Five (5) trials allowed. BACKSPACE to refresh.');
+  window.alert('MESSAGE: Please click on the image containing authentic dog. \n If there are none, click BACKSPACE. (5) trials allowed.');
 
   createAnimals();
   createCaptcha();
@@ -61,20 +63,18 @@ function draw() {
 
   updateAnimals();
   captcha.update();
-  if (showImage===true){
+  if (showImage === true) {
     showBotSquadImg();
-
   }
 }
 
 function mousePressed() {
-  // console.log(mouseX, mouseY);
   captcha.mousePressed();
 
   clicks++;
   test();
 
-  dangerFX.play();
+  barkFX.play();
 }
 
 function keyPressed() {
@@ -124,37 +124,35 @@ function refresh() {
 }
 
 function test() {
-  if (clicks > 5) {
+  if (clicks > 4) {
     showImage = true;
 
     playDangerSound();
   }
 }
 
-function showBotSquadImg(){
-  console.log("RETRY");
+function showBotSquadImg() {
   push();
   imageMode(CORNER);
-  image(botSquad, 0, 0, width,height);
+  image(botSquad, 0, 0, width, height);
   pop();
-if(confirmBox ===false){
-    confirmBox =true;
-  setTimeout(function(){
+  if (confirmBox === false) {
+    confirmBox = true;
+    setTimeout(function() {
 
-    if (window.confirm('MESSAGE : WARNING !!!! n\ Your previous CAPTCHA has been invalidated.'))
-    {
-      retry();
-    }
-  },1000);
+      if (window.confirm('MESSAGE : ERROR. \n Anti-bot detection - Your previous CAPTCHA has been invalidated.')) {
+        retry();
+      }
+    }, 5000);
+  }
 }
-}
 
-function retry(){
-  clicks=0;
-  showImage=false;
-  confirmBox =false;
+function retry() {
+  clicks = 0;
+  showImage = false;
+  confirmBox = false;
 
-  window.alert('MESSAGE: Please click on the image containing authentic dog. n\ (5) trials allowed. n\ If there are none, click BACKSPACE.');
+  window.alert('MESSAGE: Please click on the image containing authentic dog. \n If there are none, click BACKSPACE. (5) trials allowed.');
 
   createAnimals();
   createCaptcha();

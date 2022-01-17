@@ -11,12 +11,8 @@ class Captcha extends Animal {
     super.update();
 
     if (this.found) {
-      this.showMessage();
-
+      // this.showMessage();
       this.angle += this.rotationSpeed;
-      console.log(this.angle);
-
-
     }
   }
 
