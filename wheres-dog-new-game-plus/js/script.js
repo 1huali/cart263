@@ -143,7 +143,7 @@ function showBotSquadImg() {
       if (window.confirm('MESSAGE : ERROR. \n Anti-bot detection - Your previous CAPTCHA has been invalidated.')) {
         retry();
       }
-    }, 5000);
+    }, 1000);
   }
 }
 
