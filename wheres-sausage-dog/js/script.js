@@ -7,10 +7,12 @@ if it can identify the real from the fake dog.
 */
 
 "use strict";
-// let state = 'main';
+
 let clicks = 0;
-let botSquadImg = undefined;
+
+let showImage = false;
 let botSquad = undefined;
+let confirmBox =false;
 
 let dangerFX = undefined;
 
@@ -34,7 +36,7 @@ function preload() {
   }
 
   captchaImg = loadImage(`assets/images/captcha.jpeg`);
-  botSquadImg = loadImage(`assets/images/bot.jpeg`);
+  botSquad = loadImage(`assets/images/bot.jpeg`);
   dangerFX = loadSound(`assets/sounds/bark.wav`)
 
 }
@@ -49,7 +51,6 @@ function setup() {
 
   createAnimals();
   createCaptcha();
-  createBotSquad();
 }
 
 /**
@@ -58,24 +59,22 @@ Loads classes,
 function draw() {
   background(0);
 
-  // if (state === `main`) {
   updateAnimals();
   captcha.update();
+  if (showImage===true){
+    showBotSquadImg();
+
+  }
 }
-//   // if (state === `gotchu`) {
-//   //   end();
-//   // }}
-//
-// // }
-// }
 
 function mousePressed() {
   // console.log(mouseX, mouseY);
   captcha.mousePressed();
 
   clicks++;
-  console.log(clicks);
   test();
+
+  dangerFX.play();
 }
 
 function keyPressed() {
@@ -102,9 +101,6 @@ function createCaptcha() {
   // console.log(Captcha);
 }
 
-function createBotSquad() {
-  botSquadImg = botSquad;
-}
 
 function updateAnimals() {
   for (let i = 0; i < animals.length; i++) {
@@ -129,30 +125,41 @@ function refresh() {
 
 function test() {
   if (clicks > 5) {
-    window.alert('WARNING : Amount of trials exceeded. Bot detected.');
-    push();
-    imageMode(CENTER);
-    image(botSquad, windowWidth / 2, windowHeight / 2);
-    console.log(botSquad);
-    pop();
+    showImage = true;
+
     playDangerSound();
-    // goToNext();
   }
+}
+
+function showBotSquadImg(){
+  console.log("RETRY");
+  push();
+  imageMode(CORNER);
+  image(botSquad, 0, 0, width,height);
+  pop();
+if(confirmBox ===false){
+    confirmBox =true;
+  setTimeout(function(){
+
+    if (window.confirm('MESSAGE : WARNING !!!! n\ Your previous CAPTCHA has been invalidated.'))
+    {
+      retry();
+    }
+  },1000);
+}
+}
+
+function retry(){
+  clicks=0;
+  showImage=false;
+  confirmBox =false;
+
+  window.alert('MESSAGE: Please click on the image containing authentic dog. n\ (5) trials allowed. n\ If there are none, click BACKSPACE.');
+
+  createAnimals();
+  createCaptcha();
 }
 
 function playDangerSound() {
   dangerFX.play();
 }
-
-
-// function goToNext() {
-//   state = `gotchu`
-// }
-
-// function gotchu(){
-// window.alert('Back off');
-// push();
-// imageMode(CENTER);
-// image(botSquadImg);
-// pop();
-// }

@@ -16,15 +16,18 @@ class Captcha extends Animal {
       this.angle += this.rotationSpeed;
       console.log(this.angle);
 
-      this.botAlert = false
+
     }
   }
 
   showMessage() {
     if (this.botAlert == true) {
-      window.alert('CAPTCHA : Human ID confirmed.');
-    }
+        this.botAlert = false;
+      setTimeout(function(){
+      window.alert('MESSAGE: You have been successfully verified.');
+  },1000)
   }
+}
 
   mousePressed() {
     if (mouseX > this.x - this.img.width / 2 &&
