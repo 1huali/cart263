@@ -28,7 +28,7 @@ let captcha = undefined;
 
 
 /**
-Loading images, storing obj in arrays
+Loading images, storing images in arrays, loads sounds
 */
 function preload() {
   for (let i = 0; i < NUM_ANIMAL_IMG; i++) {
@@ -43,47 +43,49 @@ function preload() {
 
 }
 
-/**
-Create canvas, create animal and captcha objs and stored them into their global variable
-*/
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
   window.alert('MESSAGE: Please click on the image containing authentic dog. \n If there are none, click BACKSPACE. (5) trials allowed.');
 
+//creation of animal and captcha objects
   createAnimals();
   createCaptcha();
 }
 
 /**
-Loads classes,
+Loads classes into created variables
 */
 function draw() {
   background(0);
 
+  //stores animal, botSquad image and captcha objects-img into variables
   updateAnimals();
   captcha.update();
   if (showImage === true) {
     showBotSquadImg();
   }
+  test();
 }
 
 function mousePressed() {
   captcha.mousePressed();
 
-  clicks++;
-  test();
 
+  clicks++;
+
+//bark sounds every clicks
   barkFX.play();
 }
 
+//activates Refresh() function (below)
 function keyPressed() {
   if (keyCode === 32) {
     refresh()
   }
 }
 
-
+//images and their location are randomized. Linked w Animal class
 function createAnimals() {
   for (let i = 0; i < NUM_ANIMAL; i++) {
     let x = random(0, width);
@@ -94,20 +96,21 @@ function createAnimals() {
   }
 }
 
+//captcha's location is randomized. Linked w Captcha class
 function createCaptcha() {
   let x = random(0, width);
   let y = random(0, height);
   captcha = new Captcha(x, y, captchaImg);
-  // console.log(Captcha);
 }
 
-
+//animals displayed
 function updateAnimals() {
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();
   }
 }
 
+//BACKSPACE to generate new set of random images
 function refresh() {
   animals = [];
   for (let i = 0; i < NUM_ANIMAL; i++) {
@@ -123,6 +126,7 @@ function refresh() {
   captcha = new Captcha(x, y, captchaImg);
 }
 
+//sets a maximum of clicks before the game ends
 function test() {
   if (clicks > 4) {
     showImage = true;
@@ -131,6 +135,7 @@ function test() {
   }
 }
 
+//when the maximum of clicks is reached
 function showBotSquadImg() {
   push();
   imageMode(CORNER);
@@ -147,6 +152,7 @@ function showBotSquadImg() {
   }
 }
 
+//when the user lost, it allows an other try and restarts the game
 function retry() {
   clicks = 0;
   showImage = false;
