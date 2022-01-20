@@ -16,6 +16,9 @@ function setup() {
     let commands = {
       'hello': function() {
         alert(`hey`);
+      },
+      'goodbye': function() {
+        alert(`miss U already`)
       }
     };
     annyang.addCommands(commands);
