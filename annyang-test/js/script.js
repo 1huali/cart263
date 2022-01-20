@@ -10,20 +10,18 @@ author, and this description to match your project!
 
 
 function setup() {
-createCanvas(500,500);
+  createCanvas(500, 500);
 
-if(annyang){
-  let commands = {
-    `hello` : function(){
-      alert(`hey`)}
+  if (annyang) {
+    let commands = {
+      'hello': function() {
+        alert(`hey`);
+      }
     };
-annyang.addCommands(commands);
-annyang.start();
+    annyang.addCommands(commands);
+    annyang.start();
   }
-
-
-
-function draw() {
-background(0);
-
 }
+  function draw() {
+    background(0);
+  }
