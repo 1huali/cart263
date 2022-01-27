@@ -142,7 +142,7 @@ const animals = [
   "yak",
   "zebra"
 ];
-let currentAnimal = '';
+let currentAnimal = ``;
 let currentAnswer = ``;
 
 /**
