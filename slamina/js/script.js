@@ -169,6 +169,7 @@ function draw() {
 
 }
 
+ //chooses a random animal from the array list, and reverses the string thru reversedString().
 function mousePressed() {
   let currentAnimal = random(animals);
   let reversedAnimal = reverseString(currentAnimal);
