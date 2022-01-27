@@ -1,9 +1,8 @@
 /**
-Title of Project
-Author Name
+Stamina
+Wawa Li
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Project using Annyang and responsiveVoice librairies.
 */
 
 "use strict";
