@@ -157,16 +157,18 @@ function preload() {
 annyang
 */
 function setup() {
+  createCanvas(windowWidth, windowHeight);
+
   if (annyang) {
     let commands = {
-      'I think is it *animal': guessAnimal
+      'I think it is *animal': guessAnimal
     };
     annyang.addCommands(commands);
     annyang.start();
 
   push();
   textAlign(CENTER,CENTER);
-  textSize(24);
+  textSize(4);
   textStyle(BOLD);
   pop();
 }
@@ -177,22 +179,28 @@ function setup() {
 Description of draw()
 */
 function draw() {
+background(0);
 
+if (currentAnswer === currentAnimal){
+  fill(0,255,0)
+}
+  else {
+  fill(255,0,0)
+  }
+  text(currentAnswer, width/2,height/2);
 }
 
 
+
 //guesses the animal, which was stored in currentAnswer variable, and prints it in the console.
-// function guessAnimal() {
-//   let animal;
-//
-//   currentAnimal = animal.toLowerCase() {
-//     console.log(currentAnswer);
-//   }
-// }
+function guessAnimal(animal) {
+  currentAnswer = animal.toLowerCase();
+    console.log(currentAnswer);
+}
 
 //chooses a random animal from the array list, and reverses the string thru reversedString().
 function mousePressed() {
-  let currentAnimal = random(animals);
+currentAnimal = random(animals);
   let reversedAnimal = reverseString(currentAnimal);
 
   responsiveVoice.speak(reversedAnimal, 'UK English Male', {
