@@ -143,6 +143,7 @@ const animals =
       "yak",
       "zebra"
     ];
+let currentAnimal = '';
 
 
 /**
@@ -166,4 +167,23 @@ Description of draw()
 */
 function draw() {
 
+}
+
+function mousePressed() {
+  let currentAnimal = random(animals);
+  let reversedAnimal = reverseString(currentAnimal);
+}
+
+/**
+Reverses the provided string
+*/
+function reverseString(string) {
+  // Split the string into an array of characters
+  let characters = string.split('');
+  // Reverse the array of characters
+  let reverseCharacters = characters.reverse();
+  // Join the array of characters back into a string
+  let result = reverseCharacters.join('');
+  // Return the result
+  return result;
 }
