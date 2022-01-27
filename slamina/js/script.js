@@ -154,20 +154,22 @@ function preload() {
 
 
 /**
-Description of setup
+annyang
 */
 function setup() {
-  // if (annyang) {
-  //   let commands =
-  //     ('I think is it *animal'): guessAnimal;
-  //   annyang.addCommands();
-  //   annyang.start();
-  // }
-  // push();
-  // textAlign(CENTER);
-  // textSize(24);
-  // textStyle(BOLD);
-  // pop();
+  if (annyang) {
+    let commands = {
+      'I think is it *animal': guessAnimal
+    };
+    annyang.addCommands(commands);
+    annyang.start();
+
+  push();
+  textAlign(CENTER,CENTER);
+  textSize(24);
+  textStyle(BOLD);
+  pop();
+}
 }
 
 
