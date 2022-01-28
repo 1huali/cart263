@@ -6,6 +6,7 @@ Project using Annyang and responsiveVoice librairies.
 */
 
 "use strict";
+const NUM_TOPPINGS = 25;
 const pizzaToppings = [
   "anchovies",
   "artichoke",
@@ -37,7 +38,7 @@ let toppingList = [];
 let toppingString
 
 let currentTopping = ``;
-let countdown =  3;
+let countdown = 3;
 let score = ``;
 
 /**
@@ -53,23 +54,26 @@ annyang
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-displayList();
+  displayList();
 
   if (annyang) {
     let commands = {
       'Yes': function() {
         toppingList.push(currentTopping);
-          console.log(toppingList);
-          countdown= countdown-1;
-          console.log(countdown);
+        console.log(toppingList);
+        countdown = countdown - 1;
+        console.log(countdown);
+        reset();
 
       },
       'No': function() {
-        fill(255,0,0)
+        // fill(255,0,0)à
+        reset();
       }
     };
     annyang.addCommands(commands);
     annyang.start();
+
   }
 }
 
@@ -79,6 +83,7 @@ displayList();
 //   alert('U have reached your maximum topping. Add for 0,99$?');
 // }
 // }
+
 
 
 //displays a random topping from the array list, and reverses the string thru reversedString().
@@ -93,46 +98,55 @@ function mousePressed() {
 
 }
 
-function displayScore (){
+function reset() {
+  // pizzaToppings = [];
+  for (let i = 0; i < NUM_TOPPINGS; i++) {
+    currentTopping = random(pizzaToppings);
+
+  }
+}
+
+  function displayScore() {
+    push();
+    fill(255);
+    textSize(12);
+    text(score, width / 4 * 3, height / 4);
+    pop();
+  }
+
+  // function createList() {
+  //   push();
+  //   fill(255);
+  //   textSize(20);
+  //   text(toppingList, width/2, height/4);
+  //   pop();
+  // }
+
+  function displayList() {
+    let toppingsString = toppingList.join(`, `);
+    // Display the string
     push();
     fill(255);
     textSize(20);
-    text(score, width/2, height/4);
+    text(toppingString, width / 2, height / 4);
     pop();
-}
+  }
 
-// function createList() {
-//   push();
-//   fill(255);
-//   textSize(20);
-//   text(toppingList, width/2, height/4);
-//   pop();
-// }
+  function displayTopping() {
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    textStyle(BOLD);
+  }
 
-function displayList(){
-  let toppingsString = toppingList.join(`, `);
-  // Display the string
-  push();
-  fill(255);
-  textSize(20);
-  text(toppingString, width/2, height/4);
-  pop();
-}
-
-function displayTopping() {
-  fill(255);
-  textAlign(CENTER, CENTER);
-  textSize(20);
-  textStyle(BOLD);
-}
-
-/**
-Description of draw()
-*/
-function draw() {
-  background(0);
-  text(currentTopping, width / 2, height / 2);
-  displayTopping();
-  displayList();
-  // toppingScore();
-}
+  /**
+  Description of draw()
+  */
+  function draw() {
+    background(0);
+    text(currentTopping, width / 2, height / 2);
+    displayTopping();
+    displayList();
+    displayScore();
+    // toppingScore();
+  }
