@@ -33,11 +33,12 @@ const pizzaToppings = [
   "sun-dried tomato",
   "tomatoes"
 ];
-// let toppingList = [];
-// let chosenToppings = ;
+let toppingList = [];
+let toppingString
 
 let currentTopping = ``;
-let countdown =  0;
+let countdown =  3;
+let score = ``;
 
 /**
 Description of preload
@@ -52,14 +53,14 @@ annyang
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  displayTopping();
+displayList();
 
   if (annyang) {
     let commands = {
       'Yes': function() {
         toppingList.push(currentTopping);
           console.log(toppingList);
-          countdown= +1;
+          countdown= countdown-1;
           console.log(countdown);
 
       },
@@ -73,23 +74,48 @@ function setup() {
 }
 
 
+// function toppingScore (){
+//   if (countdown < 0){
+//   alert('U have reached your maximum topping. Add for 0,99$?');
+// }
+// }
+
 
 //displays a random topping from the array list, and reverses the string thru reversedString().
 function mousePressed() {
   currentTopping = random(pizzaToppings);
+  // new topping is said and printed on canvas
   responsiveVoice.speak(currentTopping, 'UK English Male', {
     pitch: -5,
     rate: 1.45
   });
+  displayTopping();
+
 }
 
+function displayScore (){
+    push();
+    fill(255);
+    textSize(20);
+    text(score, width/2, height/4);
+    pop();
+}
 
+// function createList() {
+//   push();
+//   fill(255);
+//   textSize(20);
+//   text(toppingList, width/2, height/4);
+//   pop();
+// }
 
-function displayList() {
+function displayList(){
+  let toppingsString = toppingList.join(`, `);
+  // Display the string
   push();
   fill(255);
   textSize(20);
-  text(toppingList, width/2, height/4);
+  text(toppingString, width/2, height/4);
   pop();
 }
 
@@ -106,5 +132,7 @@ Description of draw()
 function draw() {
   background(0);
   text(currentTopping, width / 2, height / 2);
-  displayTopping()
+  displayTopping();
+  displayList();
+  // toppingScore();
 }
