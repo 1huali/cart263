@@ -33,8 +33,7 @@ const pizzaToppings = [
   "sun-dried tomato",
   "tomatoes"
 ];
-let newToppingAdded = [];
-let chosen = false;
+let toppingList = [];
 let currentTopping = ``;
 
 /**
@@ -50,51 +49,48 @@ annyang
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  displayTopping();
 
-  // if (annyang) {
-  //   let commands = {
-  //     'Yes': function() {
-  //       chosen = true;
-  //     },
-  //     'No': function() {
-  //       chosen = false;
-  //     }
-  //   };
-  //
-  //   annyang.addCommands(commands);
-  //   annyang.start();
-  // }
+  if (annyang) {
+    let commands = {
+      'Yes': function() {
+        toppingList.push(currentTopping);
+          console.log(toppingList);
+          fill(0,250,0)
+
+      },
+      'No': function() {
+        fill(255,0,0)
+      }
+    };
+
+    annyang.addCommands(commands);
+    annyang.start();
+  }
 }
 
 
 
-//pushes the new chosen topping in list and prints in console
-// function acceptProposition() {
-//   if (chosen = true) {
-//     currentTopping = topping.push();
-//     console.log(newToppingAdded);
-//   }
-  // prints new topping to screen
-// }
-
 //displays a random topping from the array list, and reverses the string thru reversedString().
 function mousePressed() {
   currentTopping = random(pizzaToppings);
-  text(currentTopping, width / 2, height / 2);
-  displayTopping();
   responsiveVoice.speak(currentTopping, 'UK English Male', {
     pitch: -5,
     rate: 1.45
   });
 }
 
+function displayList() {
+  fill(255);
+  textAlign(CENTER, LEFT);
+  textSize(20);
+}
+
 function displayTopping() {
-  push();
   fill(255);
   textAlign(CENTER, CENTER);
-  textSize(40);
+  textSize(20);
   textStyle(BOLD);
-  pop();
 }
 
 /**
@@ -102,12 +98,5 @@ Description of draw()
 */
 function draw() {
   background(0);
-
-  // if (chosen = true){
-  //   fill(0,255,0)
-  // }
-  //   else {
-  //   fill(255,0,0)
-  //   }
-  //   text(currentAnswer, width/2,height/2);
+  text(currentTopping, width / 2, height / 2);
 }
