@@ -100,12 +100,12 @@ function setup() {
 function game() {
 
   if (showAlert === false) {
-    alert(`Hey babe tonite it's pizza we got 3 random toppings for free choose wtv OK c u later XO`)
+    alert(`Hey bb tonite it's pizza we got 3 random toppings for free say yes/no to wtv OK c u later XO`)
     showAlert = true;
   }
 
   if (introSpeaking === true) {
-    responsiveVoice.speak(currentTopping, 'UK English Male', {
+    responsiveVoice.speak(currentTopping, 'Chinese Female', {
       pitch: -5,
       rate: 1.45
     });
@@ -157,7 +157,7 @@ function reset() {
 
   let randomIndex = Math.floor(random(pizzaToppings.length));
   currentTopping = pizzaToppings[randomIndex];
-  responsiveVoice.speak(currentTopping, 'UK English Male', {
+  responsiveVoice.speak(currentTopping, 'French Female', {
     pitch: -5,
     rate: 1.45
   });
