@@ -14,6 +14,7 @@ let showAlert = false;
 let state = `game`;
 let gameStarted = false;
 let bgImg;
+let popupImg;
 
 let textColor;
 
@@ -58,7 +59,8 @@ description of preload
 */
 function preload() {
   bgImg = loadImage('assets/images/pizza.gif');
-  bgImg.resize(windowWidth, windowHeight);
+  popupImg = loadImage('assets/images/pop-up.gif');
+
 }
 
 
@@ -98,7 +100,7 @@ function setup() {
 function game() {
 
   if (showAlert === false) {
-    alert(`Hi! I can't rly see what topping I have atm just say yes/no if u want or not and U have max 3 toppings for free MIAM INIT`)
+    alert(`Hey babe tonite it's pizza we got 3 random toppings for free choose wtv OK c u later XO`)
     showAlert = true;
   }
 
@@ -121,17 +123,22 @@ function toppingScore() {
     alert('U have reached your maximum topping. Add for 0,99$?');
     state = `bonus`
   }
-  // reset();
 }
 
+//bonus state
 function bonus() {
-  console.log(state);
-  push();
-  imageMode(CENTER);
-  image(bgImg, width / 2, height / 2);
-  pop();
+  // // console.log(state);
+  // push();
+  // imageMode(CENTER);
+  // // console.log(popupImg);
+  // image(popupImg, width / 2, height / 2);
+  // pop();
   displayList();
 
+  push();
+  imageMode(CENTER);
+  text("MESSAGE: Sorry too broke :'('", width /2, height / 2);
+  pop();
 }
 
 //displays a random topping from the array list, and reverses the string thru reversedString().
@@ -144,6 +151,7 @@ function mousePressed() {
   }
 }
 
+// generates a new random topping
 function reset() {
   textColor = color(255);
 
@@ -153,14 +161,13 @@ function reset() {
     pitch: -5,
     rate: 1.45
   });
-
 }
 
 function displayScore() {
   push();
   fill(255);
-  textSize(40);
-  text(`${countdown+1} left`, width / 4 * 3, height / 4);
+  textSize(30);
+  text(`${countdown+1} topping left`, width / 4 * 3, height / 4);
   pop();
 }
 
@@ -207,15 +214,11 @@ function resetGame() {
   // reset();
 }
 
-/**
-Description of draw()
-*/
 function draw() {
   background(0);
-  displayImgBg()
-
   // game state
   if (state === `game`) {
+    displayImgBg()
     game();
   } else if (state === `bonus`) {
     bonus();
