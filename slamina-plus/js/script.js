@@ -35,6 +35,7 @@ const pizzaToppings = [
 ];
 let toppingList = [];
 let currentTopping = ``;
+let countdown =  0;
 
 /**
 Description of preload
@@ -56,14 +57,14 @@ function setup() {
       'Yes': function() {
         toppingList.push(currentTopping);
           console.log(toppingList);
-          fill(0,250,0)
+          countdown= +1;
+          console.log(countdown);
 
       },
       'No': function() {
         fill(255,0,0)
       }
     };
-
     annyang.addCommands(commands);
     annyang.start();
   }
@@ -80,10 +81,14 @@ function mousePressed() {
   });
 }
 
+
+
 function displayList() {
+  push();
   fill(255);
-  textAlign(CENTER, LEFT);
   textSize(20);
+  text(toppingList, width/2, height/4);
+  pop();
 }
 
 function displayTopping() {
@@ -99,4 +104,5 @@ Description of draw()
 function draw() {
   background(0);
   text(currentTopping, width / 2, height / 2);
+  displayTopping()
 }
