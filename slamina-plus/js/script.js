@@ -33,7 +33,9 @@ const pizzaToppings = [
   "sun-dried tomato",
   "tomatoes"
 ];
-let toppingList = [];
+// let toppingList = [];
+// let chosenToppings = ;
+
 let currentTopping = ``;
 let countdown =  0;
 
