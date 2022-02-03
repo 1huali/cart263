@@ -8,10 +8,10 @@ author, and this description to match your project!
 
 "use strict";
 let spyProfile = {
-  name: `redacted`,
-  alias: `redacted`,
-  secretWeapon: `redacted`,
-  password: `redacted`,
+  name: `REDACTED`,
+  alias: `REDACTED`,
+  secretWeapon: `REDACTED`,
+  password: `REDACTED`,
 }
 
 let animalData = undefined;
@@ -72,7 +72,7 @@ Description of draw()
 function draw() {
   background(255);
 
-  let profile = `confidential data
+  let profile = `CONFIDENTIAL DATA
 Name: ${spyProfile.name}
 Alias: ${spyProfile.alias}
 Secret Weapon: ${spyProfile.secretWeapon}
