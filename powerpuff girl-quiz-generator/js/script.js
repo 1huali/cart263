@@ -14,11 +14,13 @@ let colorData = `undefined`;
 let animalColor = `undefined`;
 let formData = `undefined`;
 let animal = `undefined`;
+let name = `undefined`;
 
 let characteristic = {
   type: `tbd`,
   form: `tbd`,
-  element: `tbd`
+  element: `tbd`,
+  name:`tbd`
 }
 //
 // let temperData = undefined;
@@ -33,6 +35,7 @@ function preload() {
   formData = loadJSON(`assets/form.json`);
   colorData = loadJSON (`https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json`);
 
+
   // radio = createRadio();
 }
 
@@ -45,12 +48,13 @@ function setup() {
   // generateSpyProfile();
 
 animal = random(animalData.animals);
+characteristic.name = prompt(`Type your name.`)
 
 let formAnimal = random(formData.animals);
 characteristic.type = random(formAnimal.Type);
 characteristic.form = random(formAnimal.Form);
 characteristic.element = random(formAnimal.Element);
-animalColor = random(colorData.name);
+animalColor = JSON.parse(random(colorData.name));
 
 
 
@@ -58,7 +62,6 @@ animalColor = random(colorData.name);
   // let data = JSON.stringify(localStorage.getItem(`spyProfileData`));
   // // user enters the password that have been generated before, if not it generates a new profile
   // if (data !== null) {
-  //   let password = prompt(`Enter password`);
   //   if (password === data.password) {
   //   setSpyProfile();
   //   }
@@ -68,15 +71,14 @@ animalColor = random(colorData.name);
 }
 
 // function setAnimalProfile(){
-//   characteristic.name = data.name;
-//   characteristic. = data.alias;
-//   characteristic. = data.secretWeapon;
-//   characteristic. = data.password;
+  // characteristic.name = name;
+//   characteristic.type = data.alias;
+//   characteristic.form = data.secretWeapon;
+//   characteristic.element = data.password;
 // }
 
 
 // function generateSpyProfile() {
-//   // spyProfile.name = prompt(`Type your name.`)
 //
 //   // let animals = random(animalData.animals);
 //
@@ -95,11 +97,12 @@ function draw() {
   background(255);
 
   let profile = `This is ur new friend
+Name: ${characteristic.name}
 Form : ${animal}
 Type : ${characteristic.type}
 Element: ${characteristic.element}
 Color : ${animalColor}
-  `;
+`;
 
   push();
   // textFont(`Courrier, monospace`);
