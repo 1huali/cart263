@@ -7,14 +7,16 @@ author, and this description to match your project!
 */
 
 "use strict";
-// let radio = undefined;
-// let currentQuestion = `Which powerpuffGirl are U?`;
 let animalData = `undefined`;
 let colorData = `undefined`;
 let animalColor = `undefined`;
 let formData = `undefined`;
 let animal = `undefined`;
 let name = `undefined`;
+let animalResponse = false;
+
+let mood = `undefined`;
+let animalEcho = undefined;
 
 let characteristic = {
   type: `tbd`,
@@ -28,15 +30,15 @@ let characteristic = {
 // let enjoymentData = undefined;
 
 /**
-Each ppgrl has 3 characteristic
+loads the
 */
 function preload() {
   animalData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/animals/common.json`);
   formData = loadJSON(`assets/form.json`);
   colorData = loadJSON (`https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json`);
+    animalEcho = loadSound(`assets/sounds/bark.wav`)
 
 
-  // radio = createRadio();
 }
 
 
@@ -57,6 +59,15 @@ characteristic.element = random(formAnimal.Element);
 animalColor = JSON.parse(random(colorData.name));
 
 
+if (annyang) {
+  let commands = {
+    'I promise': function() {
+animalResponse = true;
+    }
+  };
+  annyang.addCommands(commands);
+  annyang.start();
+}
 
 
   // let data = JSON.stringify(localStorage.getItem(`spyProfileData`));
@@ -69,6 +80,7 @@ animalColor = JSON.parse(random(colorData.name));
   //   generateSpyProfile();
   // }
 }
+
 
 // function setAnimalProfile(){
   // characteristic.name = name;
@@ -90,6 +102,7 @@ animalColor = JSON.parse(random(colorData.name));
 //   localStorage.setItem(`spyProfileData`, JSON.stringify(spyProfile));
 // }
 
+
 /**
 Description of draw()
 */
@@ -102,7 +115,12 @@ Form : ${animal}
 Type : ${characteristic.type}
 Element: ${characteristic.element}
 Color : ${animalColor}
-`;
+Now promise to take care of me forever. Say "I promise" and i'm yours.`;
+
+if (animalResponse=== true){
+  animalEcho.play();
+  animalResponse === false;
+}
 
   push();
   // textFont(`Courrier, monospace`);
