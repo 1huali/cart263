@@ -1,0 +1,21 @@
+
+  {
+    "description":  "Animals and their forms",
+    "animals": [
+        {
+          "Type": ["Bird"],
+          "Form": ["Wings", "Claws", "Peak"],
+           "Element": ["Air"]
+        },
+        {
+          "Type": ["Fish"],
+          "Form": ["Fins", "Scales"],
+          "Element": ["Water"]
+        },
+        {
+          "Type": ["Feline"],
+          "Form": ["Paws", "Fur"],
+          "Element": ["Earth"]
+        }
+        ]
+  }
