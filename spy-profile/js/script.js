@@ -36,49 +36,53 @@ function setup() {
   // generateSpyProfile();
 
   let data = JSON.parse(localStorage.getItem(`spyProfileData`));
-   if (data !== null) {
+  // user enters the password that have been generated before, if not it generates a new profile
+  if (data !== null) {
+    let password = prompt(`Enter password`);
+    if (password === data.password) {
       spyProfile.name = data.name;
       spyProfile.alias = data.alias;
       spyProfile.secretWeapon = data.secretWeapon;
       spyProfile.password = data.password;
     }
-    else{
-      generateSpyProfile();
-    }
+  } else {
+    generateSpyProfile();
   }
+}
 
 
 
-  function generateSpyProfile() {
-    spyProfile.name = prompt(`Type your name.`)
 
-    let animals = random(animalData.animals);
+function generateSpyProfile() {
+  spyProfile.name = prompt(`Type your name.`)
 
-    spyProfile.alias = `The ${animals}`;
-    spyProfile.secretWeapon = random(instrumentData.instruments);
-    spyProfile.password = random(flowerData.flowers);
+  let animals = random(animalData.animals);
 
-    // Will save profile when the page is loaded
-    localStorage.setItem(`spyProfileData`, JSON.stringify(spyProfile));
-  }
+  spyProfile.alias = `The ${animals}`;
+  spyProfile.secretWeapon = random(instrumentData.instruments);
+  spyProfile.password = random(flowerData.flowers);
 
-  /**
-  Description of draw()
-  */
-  function draw() {
-    background(255);
+  // Will save profile when the page is loaded
+  localStorage.setItem(`spyProfileData`, JSON.stringify(spyProfile));
+}
 
-    let profile = `confidential data
+/**
+Description of draw()
+*/
+function draw() {
+  background(255);
+
+  let profile = `confidential data
 Name: ${spyProfile.name}
 Alias: ${spyProfile.alias}
 Secret Weapon: ${spyProfile.secretWeapon}
 Password: ${spyProfile.password}`;
 
-    push();
-    textFont(`Courrier, monospace`);
-    textSize(24);
-    textAlign(TOP, LEFT);
-    fill(0);
-    text(profile, 100, 100);
-    pop();
-  }
+  push();
+  textFont(`Courrier, monospace`);
+  textSize(24);
+  textAlign(TOP, LEFT);
+  fill(0);
+  text(profile, 100, 100);
+  pop();
+}
