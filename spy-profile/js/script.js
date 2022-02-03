@@ -14,15 +14,17 @@ let spyProfile = {
   password : `redacted`,
 }
 
-let currentUsername = ``;
-let password = ``;
-let secretWeapon = ``;
+let animalData = undefined;
+let instrumentData = undefined;
+let flowerData = undefined;
 
 /**
 Description of preload
 */
 function preload() {
-
+animalData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/animals/common.json`);
+instrumentData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`);
+flowerData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/plants/flowers.json`);
 }
 
 
@@ -31,10 +33,19 @@ Description of setup
 */
 function setup() {
 createCanvas(windowWidth, windowHeight);
-
-spyProfile.name = prompt(`Type your name.`)
+generateSpyProfile();
 }
 
+
+function generateSpyProfile (){
+  spyProfile.name = prompt(`Type your name.`)
+
+let animals = random(animalData.animals);
+
+spyProfile.alias= `The ${animals}` ;
+spyProfile.secretWeapon= random(instrumentData.instruments);
+spyProfile.password= random(flowerData.flowers);
+}
 
 /**
 Description of draw()
@@ -42,10 +53,17 @@ Description of draw()
 function draw() {
 background(255);
 
+let profile = `confidential data
+Name: ${spyProfile.name}
+Alias: ${spyProfile.alias}
+Secret Weapon: ${spyProfile.secretWeapon}
+Password: ${spyProfile.password}`;
+
 push();
 textFont(`Courrier, monospace`);
 textSize(24);
 textAlign(TOP, LEFT);
-text(spyProfile.name, 100, 100);
+fill(0);
+text(profile, 100, 100);
 pop();
 }
