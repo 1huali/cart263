@@ -40,17 +40,19 @@ function setup() {
   if (data !== null) {
     let password = prompt(`Enter password`);
     if (password === data.password) {
-      spyProfile.name = data.name;
-      spyProfile.alias = data.alias;
-      spyProfile.secretWeapon = data.secretWeapon;
-      spyProfile.password = data.password;
+    setSpyProfile();
     }
   } else {
     generateSpyProfile();
   }
 }
 
-
+function setSpyProfile(){
+  spyProfile.name = data.name;
+  spyProfile.alias = data.alias;
+  spyProfile.secretWeapon = data.secretWeapon;
+  spyProfile.password = data.password;
+}
 
 
 function generateSpyProfile() {
