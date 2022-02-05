@@ -12,9 +12,11 @@ let animalColor = `undefined`;
 let formData = `undefined`;
 let animal = `undefined`;
 let name = `undefined`;
-let animalResponse = false;
+
+// let animalResponse = false;
 let secretData = undefined;
-let hideSecret=false;
+let hideSecret = false;
+let secretExposed = false;
 
 // let mood = `undefined`;
 let animalEcho = undefined;
@@ -23,21 +25,28 @@ let characteristic = {
   type: `tbd`,
   form: `tbd`,
   element: `tbd`,
-  name: `tbd`
+  name: `tbd`,
+  animalColor: `tbd`,
+  animal: `tbd`,
+  secret: `tbd`,
+  password: `tbd`
 }
-//
+let guardianProfile = null;
+let passedVerification = false;
+// more ideas or characteristics
 // let temperData = undefined;
 // let weaknessData = undefined;
 // let enjoymentData = undefined;
 
 /**
-loads the
+loads the json lists
 */
 function preload() {
   animalData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/animals/common.json`);
   formData = loadJSON(`assets/form.json`);
-  colorData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json`);
-  animalEcho = loadSound(`assets/sounds/bark.wav`)
+  colorData = loadJSON(`assets/Colors.json`);
+  //https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json
+  // animalEcho = loadSound(`assets/sounds/bark.wav`)
 }
 
 
@@ -46,19 +55,16 @@ Description of setup
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // generateSpyProfile();
 
-  animal = random(animalData.animals);
-  characteristic.name = prompt(`Type a name for you new guardian.`)
+  // localStorage.removeItem('guardianData');
 
-  let formAnimal = random(formData.animals);
-  characteristic.type = random(formAnimal.Type);
-  characteristic.form = random(formAnimal.Form);
-  characteristic.element = random(formAnimal.Element);
-  animalColor = random(colorData.name);
-  // Q: not working animal color displays numerals
-
-
+  // user enters the name he they have chosen for their animal before, if not it generates a new profile
+  // Will save profile when the page is loaded
+  if (localStorage.getItem(`guardianData`) === null) {
+    setGuardianProfile();
+    passedVerification = true;
+  }
+  // to add a new secret or display the list.
   if (annyang) {
     let commands = {
       'I promise': function() {
@@ -69,77 +75,66 @@ function setup() {
     annyang.addCommands(commands);
     annyang.start();
   }
-
-  // // user enters the name he they have chosen for their animal before, if not it generates a new profile
-
-  // if (name !== null) {
-  //   if (name === data.secret) {
-  //   setAnimalProfile();
-  //   }
-  // } else {
-  //   generateSpyProfile();
-  // }
 }
 
-function tellMeUrSecret(){
+function tellMeUrSecret() {
   secretData = prompt(`Tell me a secret.`)
-  let secret = JSON.stringify(localStorage.getItem(`secretData`));
+  //let secret = JSON.stringify(localStorage.getItem(`secretData`));
+  guardianProfile.secret = guardianProfile.secret + "," + secretData;
+  localStorage.setItem('guardianData', JSON.stringify(guardianProfile));
 }
-// function setAnimalProfile(){
-// characteristic.name = data.name;
-//   characteristic.type = data.type;
-//   characteristic.form = data.form;
-//   characteristic.element = data.element;
-// }
+
+function setGuardianProfile(){
+let animal = random(formData.animals);
+let animalColor = random(colorData.animalColors);
 
 
+characteristic.name = prompt(`PET SHOP SERVICE: Hi. Type a name for you new guardian.`)
+characteristic.animal = random(animalData.animals);
+characteristic.type = random(animal.Type);
+characteristic.form = random(animal.Form);
+characteristic.element = random(animal.Element);
+characteristic.animalColor = animalColor.name;
+characteristic.secret = "";
+localStorage.setItem(`guardianData`, JSON.stringify(characteristic));
+guardianProfile = characteristic;
+}
 
-function displaySecret(){
+function testGuardianName() {
+  let testName = prompt(`Type your guardian's name.`)
+  guardianProfile = JSON.parse(localStorage.getItem(`guardianData`));
+
+  if (testName === guardianProfile.name) {
+    console.log(guardianProfile);
+    passedVerification = true;
+  } else {
+    passedVerification = false;
+
+  }
+}
+
+function displaySecret() {
   push();
   // textFont(`Courrier, monospace`);
   textSize(12);
   textAlign(TOP, LEFT);
   fill(0);
-  if(hideSecret ===false){
-    text(secretData,100,400);
-  }
-  else{
-      text(`This secret is safe with me now`,100,400);
+  if (hideSecret === false) {
+    let splitSecrets = guardianProfile.secret.split(",");
+    for (let i = 1; i < splitSecrets.length; i++) {
+      text(splitSecrets[i], 100 + (i * 15), 400);
+    }
+
+  } else {
+    text(`This secret is safe with me now`, 100, 400);
 
   }
 
   pop();
 }
 
-// function generateNewGuardian (){
-  // animal = random(animalData.animals);
-  // characteristic.name = prompt(`Type your name.`)
-  //
-  // let formAnimal = random(formData.animals);
-  // characteristic.type = random(formAnimal.Type);
-  // characteristic.form = random(formAnimal.Form);
-  // characteristic.element = random(formAnimal.Element);
-  // animalColor = random(colorData.name);
-  // Q: not working animal color displays numerals
+// function showSecretList (){
 
-  // how do we make the profile stay N remain??
-  //   // Will save profile when the page is loaded
-  //   localStorage.setItem(`guardianProfile`, JSON.stringify(characteristic));
-// }
-
-// function mousePressed(){
-// let d = dist(100,600,300,600);
-// if (d < ) {
-// generateNewGuardian();
-// }
-
-//   push();
-//   // textFont(`Courrier, monospace`);
-//   textSize(12);
-//   textAlign(TOP, LEFT);
-//   fill(0);
-//   text(`Retry`,100,400);
-//   pop();
 // }
 
 /**
@@ -148,32 +143,36 @@ Description of draw()
 function draw() {
   background(255);
 
-  let guardian = `Hi, I am the guardian keeper of your secret.
-Name: ${characteristic.name}
-Form : ${animal}
-Type : ${characteristic.type}
-Element: ${characteristic.element}
-Color : ${animalColor}
+  if (passedVerification) {
+    let guardian = `Hi, I am the guardian keeper of your secret.
+Name: ${guardianProfile.name}
+Form : ${guardianProfile.animal}
+Type : ${guardianProfile.type}
+Element: ${guardianProfile.element}
+Color : ${guardianProfile.animalColor}
 Now promise to take care of me forever. Say "I promise" and your secrets are safe with me.`;
 
-  if (animalResponse === true) {
-    console.log(animalResponse);
-    // Q: why animal only plays when mousePressed? and why it has to be in draw cos the music is glitchy
-    animalEcho.play();
-    animalResponse = false;
-    // displaySecret();
-    // secrets hide after 3 seconds - DOESNT WORK
-    setTimeout(function(){hideSecret =true;},3000)
+    if (animalResponse === true) {
+      console.log(animalResponse);
+      // Q: why animal only plays when mousePressed? and why it has to be in draw cos the music is glitchy
+      // animalEcho.play();
+      animalResponse = false;
+      secretExposed = true;
+      setTimeout(function() {
+        hideSecret = true;
+      }, 3000)
+    }
 
-    // setTimeout(generateNewGuardian,3000)
-}
-
-displaySecret();
-
-  push();
-  textSize(24);
-  textAlign(TOP, LEFT);
-  fill(0);
-  text(guardian, 100, 100);
-  pop();
+    if (secretExposed === true) {
+      displaySecret();
+    }
+    push();
+    textSize(24);
+    textAlign(TOP, LEFT);
+    fill(0);
+    text(guardian, 100, 100);
+    pop();
+  } else {
+    testGuardianName();
+  }
 }
