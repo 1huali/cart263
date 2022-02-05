@@ -2,7 +2,7 @@
 Pet Shop - adoption center
 Wawa Li
 
-this uncanny pet shop generates a guardian for your secrets.
+this uncanny pet shop generates a guardian for your secrets. The user can store multiple secrets with its guardian.
 */
 
 "use strict";
@@ -48,7 +48,7 @@ function preload() {
   formData = loadJSON(`assets/form.json`);
   colorData = loadJSON(`assets/Colors.json`);
   //https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json
-  // animalEcho = loadSound(`assets/sounds/bark.wav`);
+  animalEcho = loadSound(`assets/sounds/bark.wav`);
 }
 
 
@@ -58,7 +58,7 @@ Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  localStorage.removeItem('guardianData');
+  // localStorage.removeItem('guardianData');
 
   // user enters the name he they have chosen for their animal before, if not it generates a new profile
   // Will save profile when the page is loaded
@@ -66,7 +66,6 @@ function setup() {
     setGuardianProfile();
     passedVerification = true;
   }
-  // to add a new secret or display the list.
   if (annyang) {
     let commands = {
       'I promise': function() {
@@ -159,7 +158,7 @@ Say you promise and your secrets will be safe with ${guardianProfile.name}.`;
     if (animalResponse === true) {
       console.log(animalResponse);
       // Q: why animal only plays when mousePressed? and why it has to be in draw cos the music is glitchy
-      // animalEcho.play();
+      animalEcho.play();
       animalResponse = false;
       secretExposed = true;
       setTimeout(function() {
