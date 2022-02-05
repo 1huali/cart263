@@ -5,16 +5,19 @@
         {
           "Type": ["Piscivore"],
           "Form": ["Wings", "Claws", "Peak"],
+          "Texture": ["Feather"],
            "Element": ["Air"]
         },
         {
           "Type": ["Herbivore"],
-          "Form": ["Fins", "Scales"],
+          "Form": ["Fins", "Fish", "Crustacean", "Sea Dragon"],
+          "Texture": ["Scales"],
           "Element": ["Water"]
         },
         {
           "Type": ["Carnivore"],
           "Form": ["Paws", "Fur"],
+          "Texture": ["Furr", "Skin-like"],
           "Element": ["Earth"]
         }
         ]

@@ -27,6 +27,7 @@ let characteristic = {
   element: `tbd`,
   name: `tbd`,
   features: `tbd`,
+  texture: `tbd`,
   animalColor: `tbd`,
   animal: `tbd`,
   secret: `tbd`,
@@ -87,15 +88,17 @@ function tellMeUrSecret() {
 
 function setGuardianProfile(){
 let animal = random(formData.animals);
+let animalFeature = random(formData.animals);
 let animalColor = random(colorData.animalColors);
 let animalForm = random(animalData);
+let animalTexture = random(formData.animals);
 
 characteristic.name = prompt(`PET SHOP SERVICE: Hi. Got some secrets to protect? Choose a name for your new guardian.`)
 characteristic.animal = random(animalData.animals);
 characteristic.type = random(animal.Type);
 characteristic.form = animalForm;
-characteristic.features = random(animal.Form);
-console.log(typeof(characteristic.features));
+characteristic.features = random(animalFeature.Form);
+characteristic.texture = random(animalFeature.Texture);
 characteristic.element = random(animal.Element);
 characteristic.animalColor = animalColor.name;
 characteristic.secret = "";
@@ -146,6 +149,7 @@ Name: ${guardianProfile.name}
 Form : ${guardianProfile.animal}
 Type : ${guardianProfile.type}
 Features : ${guardianProfile.features}
+Texture : ${guardianProfile.texture}
 Element: ${guardianProfile.element}
 Color : ${guardianProfile.animalColor}
 Will you take care of me forever?
