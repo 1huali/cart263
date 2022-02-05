@@ -26,6 +26,7 @@ let characteristic = {
   form: `tbd`,
   element: `tbd`,
   name: `tbd`,
+  features: `tbd`,
   animalColor: `tbd`,
   animal: `tbd`,
   secret: `tbd`,
@@ -46,7 +47,7 @@ function preload() {
   formData = loadJSON(`assets/form.json`);
   colorData = loadJSON(`assets/Colors.json`);
   //https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/wikipedia.json
-  // animalEcho = loadSound(`assets/sounds/bark.wav`)
+  // animalEcho = loadSound(`assets/sounds/bark.wav`);
 }
 
 
@@ -56,7 +57,7 @@ Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  // localStorage.removeItem('guardianData');
+  localStorage.removeItem('guardianData');
 
   // user enters the name he they have chosen for their animal before, if not it generates a new profile
   // Will save profile when the page is loaded
@@ -78,7 +79,7 @@ function setup() {
 }
 
 function tellMeUrSecret() {
-  secretData = prompt(`Tell me a secret.`)
+  secretData = prompt(`${guardianProfile.name} : Tell me your secret.`)
   //let secret = JSON.stringify(localStorage.getItem(`secretData`));
   guardianProfile.secret = guardianProfile.secret + "," + secretData;
   localStorage.setItem('guardianData', JSON.stringify(guardianProfile));
@@ -87,11 +88,14 @@ function tellMeUrSecret() {
 function setGuardianProfile(){
 let animal = random(formData.animals);
 let animalColor = random(colorData.animalColors);
+let animalForm = random(animalData);
 
-characteristic.name = prompt(`PET SHOP SERVICE: Hi. Type a name for you new guardian.`)
+characteristic.name = prompt(`PET SHOP SERVICE: Hi. Got some secrets to protect? Choose a name for your new guardian.`)
 characteristic.animal = random(animalData.animals);
 characteristic.type = random(animal.Type);
-characteristic.form = random(animal.Form);
+characteristic.form = animalForm;
+characteristic.features = random(animal.Form);
+console.log(typeof(characteristic.features));
 characteristic.element = random(animal.Element);
 characteristic.animalColor = animalColor.name;
 characteristic.secret = "";
@@ -100,7 +104,7 @@ guardianProfile = characteristic;
 }
 
 function testGuardianName() {
-  let testName = prompt(`Type your guardian's name.`)
+  let testName = prompt(`PET SHOP SERVICE: Welcome back. Your guardian's name please?`)
   guardianProfile = JSON.parse(localStorage.getItem(`guardianData`));
 
   if (testName === guardianProfile.name) {
@@ -136,13 +140,17 @@ function draw() {
   background(255);
 
   if (passedVerification) {
-    let guardian = `Hi, I am the guardian keeper of your secret.
+    let guardian = `Hi, here is the guardian keeper of your secrets.
+
 Name: ${guardianProfile.name}
 Form : ${guardianProfile.animal}
 Type : ${guardianProfile.type}
+Features : ${guardianProfile.features}
 Element: ${guardianProfile.element}
 Color : ${guardianProfile.animalColor}
-Now promise to take care of me forever. Say "I promise" and your secrets are safe with me.`;
+Will you take care of me forever?
+
+Say you promise and your secrets will be safe with ${guardianProfile.name}.`;
 
     if (animalResponse === true) {
       console.log(animalResponse);
