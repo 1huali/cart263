@@ -1,8 +1,8 @@
 /**
 Pet Shop - adoption center
-Author Name
+Wawa Li
 
-this uncanny pet shop generates a guardian for your secrets. One pet can take care of one secret.
+this uncanny pet shop generates a guardian for your secrets.
 */
 
 "use strict";
@@ -13,7 +13,7 @@ let formData = `undefined`;
 let animal = `undefined`;
 let name = `undefined`;
 
-// let animalResponse = false;
+let animalResponse = false;
 let secretData = undefined;
 let hideSecret = false;
 let secretExposed = false;
@@ -88,7 +88,6 @@ function setGuardianProfile(){
 let animal = random(formData.animals);
 let animalColor = random(colorData.animalColors);
 
-
 characteristic.name = prompt(`PET SHOP SERVICE: Hi. Type a name for you new guardian.`)
 characteristic.animal = random(animalData.animals);
 characteristic.type = random(animal.Type);
@@ -109,7 +108,6 @@ function testGuardianName() {
     passedVerification = true;
   } else {
     passedVerification = false;
-
   }
 }
 
@@ -122,20 +120,14 @@ function displaySecret() {
   if (hideSecret === false) {
     let splitSecrets = guardianProfile.secret.split(",");
     for (let i = 1; i < splitSecrets.length; i++) {
-      text(splitSecrets[i], 100 + (i * 15), 400);
+      text(splitSecrets[i], 100, 400+(i * 50));
     }
-
   } else {
     text(`This secret is safe with me now`, 100, 400);
-
   }
-
   pop();
 }
 
-// function showSecretList (){
-
-// }
 
 /**
 Description of draw()
