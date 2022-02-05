@@ -2,8 +2,7 @@
 Pet Shop - adoption center
 Author Name
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+this uncanny pet shop generates a guardian for your secrets. One pet can take care of one secret.
 */
 
 "use strict";
@@ -15,6 +14,7 @@ let animal = `undefined`;
 let name = `undefined`;
 let animalResponse = false;
 let secretData = undefined;
+let hideSecret=false;
 
 // let mood = `undefined`;
 let animalEcho = undefined;
@@ -49,7 +49,7 @@ function setup() {
   // generateSpyProfile();
 
   animal = random(animalData.animals);
-  characteristic.name = prompt(`Type your name.`)
+  characteristic.name = prompt(`Type a name for you new guardian.`)
 
   let formAnimal = random(formData.animals);
   characteristic.type = random(formAnimal.Type);
@@ -71,7 +71,6 @@ function setup() {
   }
 
   // // user enters the name he they have chosen for their animal before, if not it generates a new profile
-  let data = localStorage.getItem(`secretData`);
 
   // if (name !== null) {
   //   if (name === data.secret) {
@@ -94,22 +93,6 @@ function tellMeUrSecret(){
 // }
 
 
-// function generateSpyProfile() {
-//
-// animal = random(animalData.animals);
-// characteristic.name = prompt(`Type your name.`)
-//
-// let formAnimal = random(formData.animals);
-// characteristic.type = random(formAnimal.Type);
-// characteristic.form = random(formAnimal.Form);
-// characteristic.element = random(formAnimal.Element);
-// animalColor = random(colorData.name);
-// Q: not working animal color displays numerals
-
-// how do we make the profile stay N remain??
-//   // Will save profile when the page is loaded
-//   localStorage.setItem(`guardianProfile`, JSON.stringify(characteristic));
-// }
 
 function displaySecret(){
   push();
@@ -117,19 +100,47 @@ function displaySecret(){
   textSize(12);
   textAlign(TOP, LEFT);
   fill(0);
-  text(secretData,100,400);
+  if(hideSecret ===false){
+    text(secretData,100,400);
+  }
+  else{
+      text(`This secret is safe with me now`,100,400);
+
+  }
+
   pop();
 }
 
-function hideSecret(){
-  push();
-  // textFont(`Courrier, monospace`);
-  textSize(12);
-  textAlign(TOP, LEFT);
-  fill(0);
-  text(`safe now`,100,400);
-  pop();
-}
+// function generateNewGuardian (){
+  // animal = random(animalData.animals);
+  // characteristic.name = prompt(`Type your name.`)
+  //
+  // let formAnimal = random(formData.animals);
+  // characteristic.type = random(formAnimal.Type);
+  // characteristic.form = random(formAnimal.Form);
+  // characteristic.element = random(formAnimal.Element);
+  // animalColor = random(colorData.name);
+  // Q: not working animal color displays numerals
+
+  // how do we make the profile stay N remain??
+  //   // Will save profile when the page is loaded
+  //   localStorage.setItem(`guardianProfile`, JSON.stringify(characteristic));
+// }
+
+// function mousePressed(){
+// let d = dist(100,600,300,600);
+// if (d < ) {
+// generateNewGuardian();
+// }
+
+//   push();
+//   // textFont(`Courrier, monospace`);
+//   textSize(12);
+//   textAlign(TOP, LEFT);
+//   fill(0);
+//   text(`Retry`,100,400);
+//   pop();
+// }
 
 /**
 Description of draw()
@@ -147,11 +158,17 @@ Now promise to take care of me forever. Say "I promise" and your secrets are saf
 
   if (animalResponse === true) {
     console.log(animalResponse);
-    // animalEcho.play();
-    animalResponse === false;
-    displaySecret();
-    // setTimeout(hideSecret,3000)
+    // Q: why animal only plays when mousePressed? and why it has to be in draw cos the music is glitchy
+    animalEcho.play();
+    animalResponse = false;
+    // displaySecret();
+    // secrets hide after 3 seconds - DOESNT WORK
+    setTimeout(function(){hideSecret =true;},3000)
+
+    // setTimeout(generateNewGuardian,3000)
 }
+
+displaySecret();
 
   push();
   textSize(24);

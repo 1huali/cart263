@@ -3,17 +3,17 @@
     "description":  "Animals and their forms",
     "animals": [
         {
-          "Type": ["Bird"],
+          "Type": ["Piscivore"],
           "Form": ["Wings", "Claws", "Peak"],
            "Element": ["Air"]
         },
         {
-          "Type": ["Fish"],
+          "Type": ["Herbivore"],
           "Form": ["Fins", "Scales"],
           "Element": ["Water"]
         },
         {
-          "Type": ["Feline"],
+          "Type": ["Carnivore"],
           "Form": ["Paws", "Fur"],
           "Element": ["Earth"]
         }
